@@ -1,26 +1,26 @@
 /*
 用来定义路由的路由器模块
  */
-const express = require('express')
-const md5 = require('blueimp-md5')
+const express = require('express');
+const md5 = require('blueimp-md5');
 
-const UserModel = require('../models/UserModel')
-const CategoryModel = require('../models/CategoryModel')
-const ProductModel = require('../models/ProductModel')
-const RoleModel = require('../models/RoleModel')
+const UserModel = require('../models/UserModel');
+const CategoryModel = require('../models/CategoryModel');
+const ProductModel = require('../models/ProductModel');
+const RoleModel = require('../models/RoleModel');
 
 
 // 得到路由器对象
-const router = express.Router()
+const router = express.Router();
 // console.log('router', router)
 
 // 指定需要过滤的属性
-const filter = {password: 0, __v: 0}
+const filter = { password: 0, __v: 0 }
 
 
 // 登陆
 router.post('/login', (req, res) => {
-  const {username, password} = req.body
+  const { username, password } = req.body
   // 根据username和password查询数据库users, 如果没有, 返回提示错误的信息, 如果有, 返回登陆成功信息(包含user)
   UserModel.findOne({username, password: md5(password)})
     .then(user => {

@@ -1,6 +1,7 @@
-/*
-能操作users集合数据的Model
+/**
+顾客或管理员信息的Model
  */
+
 // 1.引入mongoose
 const mongoose = require('mongoose')
 const md5 = require('blueimp-md5')
@@ -19,11 +20,11 @@ const userSchema = new mongoose.Schema({
 const UserModel = mongoose.model('users', userSchema)
 
 // 初始化默认超级管理员用户: admin/admin
-UserModel.findOne({username: 'admin'}).then(user => {
+UserModel.findOne({ username: 'admin' }).then(user => {
   if(!user) {
-    UserModel.create({username: 'admin', password: md5('admin')})
+    UserModel.create({ username: 'admin', password: md5('admin') })
             .then(user => {
-              console.log('初始化用户: 用户名: admin 密码为: admin')
+              console.log('初始化用户: 用户名: admin 密码为: admin');
             })
   }
 })
